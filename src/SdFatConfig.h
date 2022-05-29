@@ -93,7 +93,9 @@
  * from the SD card.
  *
  * Enabling dedicated SPI will cost extra flash and RAM.
+ *
  */
+#define ENABLE_DEDICATED_SPI 0
 #ifndef ENABLE_DEDICATED_SPI
 #if defined(__AVR__) && FLASHEND < 0X8000
 // 32K AVR boards.
