@@ -105,6 +105,11 @@
 #define ENABLE_DEDICATED_SPI 1
 #endif  // defined(__AVR__) && FLASHEND < 0X8000
 #endif  // ENABLE_DEDICATED_SPI
+#if ENABLE_DEDICATED_SPI == 1
+#warning Using dedicated SPI!
+#else
+#warning Using shared SPI!
+#endif
 //------------------------------------------------------------------------------
 // Driver options
 /**
@@ -359,33 +364,39 @@ typedef uint8_t SdCsPin_t;
  * for FAT16/FAT32 table entries.  This improves performance for large
  * writes that are not a multiple of 512 bytes.
  */
+#ifndef USE_SEPARATE_FAT_CACHE
 #ifdef __arm__
 #define USE_SEPARATE_FAT_CACHE 1
 #else  // __arm__
 #define USE_SEPARATE_FAT_CACHE 0
 #endif  // __arm__
+#endif
 //------------------------------------------------------------------------------
 /**
  * Set USE_EXFAT_BITMAP_CACHE nonzero to use a second 512 byte cache
  * for exFAT bitmap entries.  This improves performance for large
  * writes that are not a multiple of 512 bytes.
  */
+#ifndef USE_EXFAT_BITMAP_CACHE
 #ifdef __arm__
 #define USE_EXFAT_BITMAP_CACHE 1
 #else  // __arm__
 #define USE_EXFAT_BITMAP_CACHE 0
 #endif  // __arm__
+#endif
 //------------------------------------------------------------------------------
 /**
  * Set USE_MULTI_SECTOR_IO nonzero to use multi-sector SD read/write.
  *
  * Don't use mult-sector read/write on small AVR boards.
  */
+#ifndef USE_MULTI_SECTOR_IO
 #if defined(RAMEND) && RAMEND < 3000
 #define USE_MULTI_SECTOR_IO 0
 #else  // RAMEND
 #define USE_MULTI_SECTOR_IO 1
 #endif  // RAMEND
+#endif
 //------------------------------------------------------------------------------
 /** Enable SDIO driver if available. */
 #if defined(__MK64FX512__) || defined(__MK66FX1M0__)
