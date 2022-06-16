@@ -108,7 +108,7 @@
 #if ENABLE_DEDICATED_SPI == 1
 #warning Using dedicated SPI!
 #else
-#warning Using shared SPI!
+//#warning Using shared SPI!
 #endif
 //------------------------------------------------------------------------------
 // Driver options
